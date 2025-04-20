@@ -76,7 +76,7 @@ function updateSnake() {
     if (head.x === food.x && head.y === food.y) {
         score++;
         if(score % 5 === 0) {
-            speed -= 5;
+            speed -= 10;
         }
         scoreElement.innerHTML = `Score: ${score}`;
         generateFood();
