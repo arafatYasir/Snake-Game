@@ -8,7 +8,7 @@ let gameStarted = false;
 
 let gridSize = 20;
 let tiles = canvas.width / gridSize;
-let speed = 100;
+let speed = 120;
 
 // game initial setup
 let snake = [
