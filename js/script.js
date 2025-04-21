@@ -3,12 +3,14 @@ let ctx = canvas.getContext("2d");
 let scoreElement = document.querySelector(".score");
 let pauseBtn = document.querySelector(".pause-btn");
 
+pauseBtn.innerHTML = "Pause";
+
 let gamePause = false;
 let gameStarted = false;
 
 let gridSize = 20;
 let tiles = canvas.width / gridSize;
-let speed = 120;
+let speed = 100;
 
 // game initial setup
 let snake = [
@@ -24,22 +26,23 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowUp" && dy !== 1) {
         dx = 0;
         dy = -1;
-        gameStarted = true;
+        
+        if(!gameStarted) gameStarted = true;
     }
     else if (e.key === "ArrowDown" && dy !== -1) {
         dx = 0;
         dy = 1;
-        gameStarted = true;
+        if(!gameStarted) gameStarted = true;
     }
     else if (e.key === "ArrowLeft" && dx !== 1) {
         dx = -1;
         dy = 0;
-        gameStarted = true;
+        if(!gameStarted) gameStarted = true;
     }
     else if (e.key === "ArrowRight" && dx !== -1) {
         dx = 1;
         dy = 0;
-        gameStarted = true;
+        if(!gameStarted) gameStarted = true;
     }
 });
 
@@ -85,6 +88,7 @@ function updateSnake() {
         score++;
         if (score % 5 === 0) {
             speed -= 10;
+            console.log(speed);
         }
         scoreElement.innerHTML = `Score: ${score}`;
         generateFood();
@@ -130,8 +134,10 @@ function runGame() {
 pauseBtn.addEventListener("click", () => {
     if (gameStarted) {
         gamePause = gamePause === true ? false : true;
+        pauseBtn.innerHTML = "Play";
     }
     if (!gamePause) {
+        pauseBtn.innerHTML = "Pause";
         runGame();
     }
 })
